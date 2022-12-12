@@ -19,11 +19,9 @@
       name: 'screenshot-item',
       props: ['data'],
       data: () => ({
+        api_url: process.env.VUE_APP_API_URL
       }),
       computed: {
-        api_url(){
-            return this.$store.state.api_url;
-        },
       },
       methods: {
         viewImage(){

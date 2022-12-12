@@ -6,10 +6,10 @@
             <v-col md="6" lg="4" sm="12" xs="12" xl="4">
                 <date-range-picker v-model="dateRange" @update="dateFilterChange">
                     <template #input="picker">
-                        <div fluid fill-width class="d-flex justify-content-end overline">
-                            <v-icon aria-label="My Account" role="img" aria-hidden="false">
-                                mdiAccount
-                            </v-icon>
+                        <div fluid fill-width class="d-flex justify-center overline">
+                            <div class="d-flex justify-center align-center">
+                                <svg-icon type="mdi" :path="icons.mdiCalendarRange" class="mr-4"></svg-icon>
+                            </div>
                             Filter Date: {{ picker.startDate | date }} - {{ picker.endDate | date }}
                         </div>
                     </template>
@@ -54,6 +54,7 @@
         </div>
         <div class="d-flex justify-center mt-12 white--text" v-if="(sessions.length != 0)">
             <v-btn v-if="(isSeeMoreLoading == false)" depressed color="pink accent-3" class="white--text" @click="fetchSession(true)">
+                <svg-icon type="mdi" :path="icons.mdiUnfoldMoreHorizontal"></svg-icon>
                 See more
             </v-btn>
             <div v-else class="text-center">
@@ -67,11 +68,11 @@
 <script>
     import ScreenshotItem from '../components/ScreenshotItem.vue';
     import ViewScreenshotModal from '../components/ViewScreenshotModal.vue';
-    import DateRangePicker from 'vue2-daterange-picker'
-    //you need to import the CSS manually
-    import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
-    import LottieAnimation from 'lottie-web-vue'
-    import { mdiAccount } from "@mdi/js";
+    import DateRangePicker from 'vue2-daterange-picker';
+    import 'vue2-daterange-picker/dist/vue2-daterange-picker.css';
+    import LottieAnimation from 'lottie-web-vue';
+    import SvgIcon from '@jamescoyle/vue-icon'
+    import { mdiCalendarRange, mdiUnfoldMoreHorizontal } from '@mdi/js';
 
   export default {
     name: 'screenshots-view',
@@ -91,15 +92,18 @@
             ],
             date_filter: {},
             icons: {
-                mdiAccount
-            }
+                mdiCalendarRange,
+                mdiUnfoldMoreHorizontal
+            },
+            api_url: process.env.VUE_APP_API_URL
         }
     },
     components: {
         ScreenshotItem,
         ViewScreenshotModal,
         DateRangePicker,
-        LottieAnimation
+        LottieAnimation,
+        SvgIcon
     },
     filters: {
         dateCell (value) {
@@ -112,9 +116,6 @@
         }
     },
     computed: {
-        api_url(){
-            return this.$store.state.api_url;
-        },
         isSeeMoreLoading(){
             return this.$store.state.is_see_more_loading;
         },
@@ -170,8 +171,6 @@
                 is_from_see_more: true,
                 query: this.date_filter
             });
-            console.log(filter_date_start);
-            console.log(filter_date_end);
         }
     },
     created(){

@@ -6,12 +6,36 @@
   </div>
 </template>
 <script>
+import { isSiteCookieExists, getCookie } from './modules/cookie_handler.js';
+
 export default {
+
   methods: {
+    redirectLogin(){
+      if(isSiteCookieExists() && this.$route.name == 'login'){
+        window.location.replace("/");
+        return true;
+      }
+      
+      if(isSiteCookieExists()  == false && this.$route.name != 'login'){
+        window.location.replace("/login");
+        return true;
+      }
+
+      return false;
+    }
   },
   name: 'App',
   data: () => ({
   }),
+  created() {
+    //check user cookie
+    const isRedirected = this.redirectLogin();
+
+    if(isRedirected == false){
+      this.$store.commit("setUserInfo", JSON.parse(getCookie()));
+    }
+  }
 }
 </script>
 <style lang="scss">

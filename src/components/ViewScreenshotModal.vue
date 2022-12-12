@@ -13,13 +13,11 @@
     export default {
       name: 'view-screenshot-modal',
       data: () => ({
+        api_url: process.env.VUE_APP_API_URL
       }),
       computed: {
         view_screenshot(){
             return this.$store.state.view_screenshot;
-        },
-        api_url(){
-            return this.$store.state.api_url;
         },
       },
       methods: {

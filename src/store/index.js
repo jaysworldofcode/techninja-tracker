@@ -6,18 +6,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    api_url: 'http://localhost:3000/',
     sessions: [],
     view_screenshot: null,
     is_fetching_session: true,
-    is_see_more_loading: false
+    is_see_more_loading: false,
+    user_info: {}
   },
   getters: {
+    getUserToken(state) {
+      return state.user_info.token;
+    }
   },
   mutations: {
     setViewScreenhot(state, data){
       state.view_screenshot = data;
     },
+    setUserInfo(state, data){
+      state.user_info = data;
+    }
   },
   actions: {
     async fetchSession({commit}, data){
@@ -30,7 +36,7 @@ export default new Vuex.Store({
         this.state.sessions = [];
       }
 
-      const response = await TimerSessionRepository.get(data.page, data.per_page, 1, data.query);
+      const response = await TimerSessionRepository.get(data.page, data.per_page, this.state.user_info.user.client_id, data.query, this.state.user_info.token);
 
       for (let i = 0; i < response.sessions.docs.length; i++) {
         this.state.sessions.push(response.sessions.docs[i]);
