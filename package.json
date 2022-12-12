@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "dev": "cross-env NODE_OPTIONS=--max_old_space_size=8192 vue-cli-service serve --mode development"
+    "build": "node --max_old_space_size=4096 node_modules/.bin/vue-cli-service build --open",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
