@@ -73,8 +73,8 @@
             this.snackbarMessage = login.error;
             this.showSnackbar = true;
           }else{
-            setCookie(JSON.stringify(login.data), 9999);
-            window.location.replace("/");
+            // setCookie(JSON.stringify(login.data), 9999);
+            // window.location.replace("/");
           }
 
           console.log(login);
