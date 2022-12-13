@@ -13,7 +13,6 @@
     export default {
       name: 'view-screenshot-modal',
       data: () => ({
-        api_url: process.env.VUE_APP_API_URL
       }),
       computed: {
         view_screenshot(){

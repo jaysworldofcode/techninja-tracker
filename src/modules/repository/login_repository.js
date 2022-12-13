@@ -11,7 +11,7 @@ class Login {
     }
 
     async start(){
-        return await axios.post(process.env.VUE_APP_API_URL+'/auth/login', {
+        return await axios.post(process.env.VUE_APP_API_URL+'auth/login', {
             email: this.email,
             password: this.password,
         }).then(function (res) {
