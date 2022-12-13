@@ -83,9 +83,6 @@
       }
     },
   }
-  created(){
-    console.log(process.env.VUE_APP_API_URL);
-  }
   </script>
 <style lang="scss" scoped>
 .v-btn,
